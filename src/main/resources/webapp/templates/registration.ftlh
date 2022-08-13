@@ -5,6 +5,12 @@
 </head>
 <body>
 
+<#if error??>
+    <p>
+        ${error}
+    </p>
+</#if>
+
 </div>
 <form action="/registration" method="post">
     <div><label> User Name : <input type="text" name="username"/> </label></div>

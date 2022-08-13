@@ -9,6 +9,10 @@
     Invalid username and password.
 <#elseif RequestParameters.logout??>
     You have been logged out.
+<#elseif status??>
+    <p>
+        ${status}
+    </p>
 </#if>
 
 </div>

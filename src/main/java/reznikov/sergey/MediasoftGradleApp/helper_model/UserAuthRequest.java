@@ -1,6 +1,6 @@
 package reznikov.sergey.MediasoftGradleApp.helper_model;
 
-public class UserAuthModel {
+public class UserAuthRequest {
     String password;
     String username;
 

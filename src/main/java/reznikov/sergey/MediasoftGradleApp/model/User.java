@@ -1,5 +1,6 @@
 package reznikov.sergey.MediasoftGradleApp.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,6 +14,7 @@ import java.util.Set;
 public class User implements UserDetails {
 
     @Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
@@ -23,6 +25,20 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "sender")
+    private Set<Message> sentMessages;
+
+    @OneToMany(mappedBy = "recipient")
+    private Set<Message> receivedMessages;
+
+    public void setSentMessages(Set<Message> sentMessages) {
+        this.sentMessages = sentMessages;
+    }
+
+    public void setReceivedMessages(Set<Message> receivedMessages) {
+        this.receivedMessages = receivedMessages;
+    }
 
     public User(String username, String password) {
         this.username = username;
