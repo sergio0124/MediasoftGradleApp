@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+#context_menu {
+    position: fixed;
+    z-index: 10000;
+    width: 100px;
+    background: cyan;
+    transform: scale(0);
+    transform-origin: top left;
+}
+
+#context_menu.activate{
+    transform: scale(1);
+    transition: transform 200ms ease-in-out;
+}
+
+#context_menu .item {
+    padding: 8px 10px;
+    font-size: 15px;
+    color: darkslateblue;
+}
+
+#context_menu .item:hover{
+    background: #eee;
+}

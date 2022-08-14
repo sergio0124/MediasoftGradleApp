@@ -2,9 +2,17 @@ package reznikov.sergey.MediasoftGradleApp.helper_model;
 
 public class MessageRequest {
 
+    private Long id;
     private String text;
-    private Long senderId;
-    private Long recipientId;
+    private String recipientName;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getText() {
         return text;
@@ -14,19 +22,11 @@ public class MessageRequest {
         this.text = text;
     }
 
-    public Long getSenderId() {
-        return senderId;
+    public String getRecipientName() {
+        return recipientName;
     }
 
-    public void setSenderId(Long senderId) {
-        this.senderId = senderId;
-    }
-
-    public Long getRecipientId() {
-        return recipientId;
-    }
-
-    public void setRecipientId(Long recipientId) {
-        this.recipientId = recipientId;
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
     }
 }

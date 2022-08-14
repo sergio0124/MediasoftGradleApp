@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface MessageRepo extends JpaRepository<Message, Long> {
 
-    List<Message> findMessagesBySenderIsInAndRecipientIsIn(Collection<User> sender, Collection<User> recipient);
+    List<Message> findMessagesBySenderIsInAndRecipientIsInOrderByTimeAsc(Collection<User> sender, Collection<User> recipient);
 
 }

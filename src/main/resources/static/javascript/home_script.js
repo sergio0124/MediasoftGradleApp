@@ -5,7 +5,6 @@ function http_post(theUrl, inputData) {
     xmlHttp.open("POST", theUrl, false);
     xmlHttp.setRequestHeader("Content-Type", "application/json");
     xmlHttp.send(inputData);
-    console.log(xmlHttp.responseText)
     return JSON.parse(xmlHttp.responseText);
 }
 

@@ -1,7 +1,6 @@
 package reznikov.sergey.MediasoftGradleApp.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.proxy.NoOp;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
