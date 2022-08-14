@@ -24,6 +24,6 @@
 
 </body>
 
-<script type="text/javascript" src="home_script.js"></script>
+<script type="text/javascript" src="javascript/home_script.js"></script>
 
 </html>

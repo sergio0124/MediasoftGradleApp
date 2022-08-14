@@ -48,8 +48,8 @@ public class MessageController {
 
     @GetMapping("/dialog")
     ModelAndView getDialogMessages(
-            @AuthenticationPrincipal User curUser,
-            @RequestParam("recipient_name") String recipient_name
+            @RequestParam("recipient_name") String recipient_name,
+            @AuthenticationPrincipal User curUser
     ) {
 
         ModelAndView result = new ModelAndView();

@@ -23,7 +23,7 @@ public class HelloController {
     @Autowired
     UserRepo userRepo;
 
-    @GetMapping("/hello")
+    @GetMapping("/home")
     ModelAndView getHello() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("home_page");
@@ -33,7 +33,7 @@ public class HelloController {
 
     @GetMapping("/")
     String redirectionToHello() {
-        return "redirect:/hello";
+        return "redirect:/home";
     }
 
     @GetMapping("/registration")
