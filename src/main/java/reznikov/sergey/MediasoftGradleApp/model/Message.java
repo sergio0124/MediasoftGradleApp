@@ -3,6 +3,8 @@ package reznikov.sergey.MediasoftGradleApp.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Set;
+
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -17,6 +19,11 @@ public class Message {
     private String text;
 
     private Timestamp time = Timestamp.from(Instant.now());
+
+    @CollectionTable(name = "message_emoji",
+            joinColumns = @JoinColumn(name = "message_id"))
+    @Enumerated(EnumType.STRING)
+    private Emoji emoji = null;
 
     @ManyToOne
     @JoinColumn(name = "sender_id")
@@ -33,6 +40,14 @@ public class Message {
     }
 
     public Message() {
+    }
+
+    public Emoji getEmoji() {
+        return emoji;
+    }
+
+    public void setEmoji(Emoji emoji) {
+        this.emoji = emoji;
     }
 
     public Timestamp getTime() {

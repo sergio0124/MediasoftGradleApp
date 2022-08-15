@@ -14,10 +14,10 @@ import reznikov.sergey.MediasoftGradleApp.model.User;
 import reznikov.sergey.MediasoftGradleApp.repo.MessageRepo;
 import reznikov.sergey.MediasoftGradleApp.repo.UserRepo;
 
-import javax.persistence.PostUpdate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/message")
@@ -26,6 +26,22 @@ public class MessageController {
     MessageRepo messageRepo;
     @Autowired
     UserRepo userRepo;
+
+    @PostMapping("/dialog/emoji")
+    ResponseEntity<Object> addEmoji(
+            @RequestBody(required = false) MessageRequest messageRequest){
+
+        if(messageRequest.getEmoji() == null){
+
+        }
+
+        Message message = messageRepo
+                .findById(messageRequest.getId())
+                .orElseThrow(() -> new UsernameNotFoundException("Message is not found"));
+
+
+
+    }
 
 
     @PostMapping("/dialog")
@@ -40,8 +56,7 @@ public class MessageController {
 
         Message message = new Message(messageRequest.getText(), curUser, recipient);
 
-        message = messageRepo.save(message);
-        messageRepo.flush();
+        message = messageRepo.saveAndFlush(message);
         return ResponseEntity.ok(message);
     }
 
@@ -87,7 +102,7 @@ public class MessageController {
                 .findById(messageRequest.getId())
                 .orElseThrow(() -> new UsernameNotFoundException("Message is not found"));
 
-        if (message.getSender().getId() != curUser.getId()) {
+        if (!Objects.equals(message.getSender().getId(), curUser.getId())) {
             return ResponseEntity
                     .status(HttpStatus.NOT_ACCEPTABLE)
                     .body("You can not change messages that was sent not by you");
@@ -97,5 +112,26 @@ public class MessageController {
         messageRepo.flush();
 
         return ResponseEntity.ok(message);
+    }
+
+    @DeleteMapping("/dialog")
+    ResponseEntity<Object> deleteMessage(
+            @RequestBody(required = false) MessageRequest messageRequest,
+            @AuthenticationPrincipal User curUser
+    ) throws UsernameNotFoundException {
+
+        Message message = messageRepo
+                .findById(messageRequest.getId())
+                .orElseThrow(() -> new UsernameNotFoundException("Message is not found"));
+
+        if (!message.getSender().getId().equals(curUser.getId())) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_ACCEPTABLE)
+                    .body("You can not change messages that was sent not by you");
+        }
+
+        messageRepo.delete(message);
+        messageRepo.flush();
+        return ResponseEntity.ok("Deleted message");
     }
 }

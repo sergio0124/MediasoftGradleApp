@@ -62,7 +62,9 @@
 <div id = "context_menu">
     <div class="item">Удалить</div>
     <div class="item">Изменить</div>
+    <div>
 </div>
+
 </body>
 
 

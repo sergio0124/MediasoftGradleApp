@@ -32,6 +32,14 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "recipient")
     private Set<Message> receivedMessages;
 
+    public Set<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public Set<Message> getReceivedMessages() {
+        return receivedMessages;
+    }
+
     public void setSentMessages(Set<Message> sentMessages) {
         this.sentMessages = sentMessages;
     }

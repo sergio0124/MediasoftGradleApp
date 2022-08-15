@@ -6,6 +6,16 @@ public class MessageRequest {
     private String text;
     private String recipientName;
 
+    private String emoji;
+
+    public String getEmoji() {
+        return emoji;
+    }
+
+    public void setEmoji(String emoji) {
+        this.emoji = emoji;
+    }
+
     public Long getId() {
         return id;
     }
