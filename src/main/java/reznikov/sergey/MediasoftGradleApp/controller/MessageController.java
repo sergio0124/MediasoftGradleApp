@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import reznikov.sergey.MediasoftGradleApp.helper_model.MessageRequest;
+import reznikov.sergey.MediasoftGradleApp.helper_model.MessageResponse;
+import reznikov.sergey.MediasoftGradleApp.model.Emoji;
 import reznikov.sergey.MediasoftGradleApp.model.Message;
 import reznikov.sergey.MediasoftGradleApp.model.User;
 import reznikov.sergey.MediasoftGradleApp.repo.MessageRepo;
@@ -29,18 +31,27 @@ public class MessageController {
 
     @PostMapping("/dialog/emoji")
     ResponseEntity<Object> addEmoji(
-            @RequestBody(required = false) MessageRequest messageRequest){
+            @RequestBody(required = false) MessageRequest messageRequest) {
 
-        if(messageRequest.getEmoji() == null){
+        if (messageRequest.getEmoji() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("no emoji found");
+        }
 
+        Emoji emoji;
+        try {
+            emoji = Emoji.valueOf(messageRequest.getEmoji());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("emoji can not be parsed");
         }
 
         Message message = messageRepo
                 .findById(messageRequest.getId())
                 .orElseThrow(() -> new UsernameNotFoundException("Message is not found"));
 
+        message.setEmoji(emoji);
+        messageRepo.flush();
 
-
+        return ResponseEntity.ok("ok");
     }
 
 
@@ -56,8 +67,9 @@ public class MessageController {
 
         Message message = new Message(messageRequest.getText(), curUser, recipient);
 
-        message = messageRepo.saveAndFlush(message);
-        return ResponseEntity.ok(message);
+        message = messageRepo.save(message);
+        messageRepo.flush();
+        return ResponseEntity.ok(new MessageResponse(message));
     }
 
 
@@ -111,7 +123,7 @@ public class MessageController {
         message.setText(messageRequest.getText());
         messageRepo.flush();
 
-        return ResponseEntity.ok(message);
+        return ResponseEntity.ok(new MessageResponse(message));
     }
 
     @DeleteMapping("/dialog")

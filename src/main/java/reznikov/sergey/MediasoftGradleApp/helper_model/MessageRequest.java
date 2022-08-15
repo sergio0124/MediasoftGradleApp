@@ -5,8 +5,25 @@ public class MessageRequest {
     private Long id;
     private String text;
     private String recipientName;
-
     private String emoji;
+    private Integer rowNumber;
+    private Integer neededToLoad;
+
+    public Integer getRowNumber() {
+        return rowNumber;
+    }
+
+    public void setRowNumber(Integer rowNumber) {
+        this.rowNumber = rowNumber;
+    }
+
+    public Integer getNeededToLoad() {
+        return neededToLoad;
+    }
+
+    public void setNeededToLoad(Integer neededToLoad) {
+        this.neededToLoad = neededToLoad;
+    }
 
     public String getEmoji() {
         return emoji;

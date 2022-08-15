@@ -2,7 +2,7 @@ body {
     margin: 0;
 }
 
-#context_menu {
+.context_menu {
     position: fixed;
     z-index: 10000;
     width: 150px;
@@ -12,16 +12,49 @@ body {
     border: 2px solid black;
 }
 
-#context_menu.active{
+.context_menu.active {
     transform: scale(1);
     transition: transform 200ms ease-in-out;
 }
 
-#context_menu .item {
+.context_menu .item {
     padding: 8px 10px;
     font-size: 15px;
 }
 
-#context_menu .item:hover{
+.context_menu img {
+    width: 30px;
+    height: 30px;
+    padding: 3px 5px;
+}
+
+.emoji-container {
+    width: 50px;
+    display: flex;
+}
+
+.emoji-container img {
+    flex: 30%;
+}
+
+.context_menu .item:hover {
     background: beige;
+}
+
+#table_messages img {
+    width: 30px;
+    height: 30px;
+}
+
+#table_messages {
+    max-width: 500px;
+    max-height: 600px;
+    overflow: scroll;
+    horiz-align: center;
+    border: 2px solid black;
+    display: inline-block;
+}
+
+#table_messages tr:hover {
+    background: cyan;
 }

@@ -18,32 +18,36 @@
 </h1>
 
 
-<div>
+<table id="table_messages">
     <#if messages??>
-        <table id="table_messages">
-            <#list messages as message>
+        <#list messages as message>
 
+            <tr>
                 <#if message.sender.username = username>
-                    <tr>
-                        <td style="visibility: hidden">${message.id}</td>
-                        <td style="visibility: hidden">${message.sender.username}</td>
-                        <td>......................................${message.text}</td>
-                    </tr>
+                    <td style="visibility: hidden">${message.id}</td>
+                    <td style="visibility: hidden">${message.sender.username}</td>
+                    <td>......................................${message.text}</td>
                 <#else>
-                    <tr>
-                        <td style="visibility: hidden">${message.id}</td>
-                        <td style="visibility: hidden">${message.sender.username}</td>
-                        <td>${message.text}</td>
-                    </tr>
+                    <td style="visibility: hidden">${message.id}</td>
+                    <td style="visibility: hidden">${message.sender.username}</td>
+                    <td>${message.text}</td>
                 </#if>
+                <td>
+                    <img
+                            <#if message.emoji??>
+                                src="images/${message.emoji}.jpg" alt=""
+                            <#else>
+                                src="images/white.jpg" alt=""
+                            </#if>
+                    >
+                </td>
+            </tr>
 
-            </#list>
-        </table>
-    <#elseif error??>
-        <p>${error}</p>
+        </#list>
+
     </#if>
-</div>
 
+</table>
 
 <div>
     <span>
@@ -59,11 +63,25 @@
 </div>
 
 
-<div id = "context_menu">
+<div id="context_menu" class="context_menu">
     <div class="item">Удалить</div>
     <div class="item">Изменить</div>
-    <div>
+    <div class="emoji-container">
+        <img class="item" src="images/sad.jpg" alt="">
+        <img class="item" src="images/smile.jpg" alt="">
+        <img class="item" src="images/poop.jpg" alt="">
+    </div>
 </div>
+
+
+<div id="context_menu_only_emoji" class="context_menu">
+    <div class="emoji-container">
+        <img class="item" src="images/sad.jpg" alt="">
+        <img class="item" src="images/smile.jpg" alt="">
+        <img class="item" src="images/poop.jpg" alt="">
+    </div>
+</div>
+
 
 </body>
 

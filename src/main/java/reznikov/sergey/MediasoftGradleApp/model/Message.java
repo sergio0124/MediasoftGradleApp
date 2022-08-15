@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "message")
@@ -23,6 +24,7 @@ public class Message {
     @CollectionTable(name = "message_emoji",
             joinColumns = @JoinColumn(name = "message_id"))
     @Enumerated(EnumType.STRING)
+
     private Emoji emoji = null;
 
     @ManyToOne
