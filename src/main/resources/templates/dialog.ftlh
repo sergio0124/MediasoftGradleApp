@@ -17,6 +17,11 @@
     ${recipient_name}...................${username}
 </h1>
 
+<h1></h1>
+<button id = "load_more_button">
+    Подгрузить предыдущие 10 сообщений
+</button>
+
 
 <table id="table_messages">
     <#if messages??>
@@ -87,5 +92,6 @@
 
 
 <script type="text/javascript" src="dialog_script.js"></script>
+<script type="text/javascript" src="dialog_add_massages.js"></script>
 
 </html>

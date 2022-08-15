@@ -20,10 +20,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/message")
 public class MessageController {
+    private final static int PAGE_SIZE = 10;
+
     @Autowired
     MessageRepo messageRepo;
     @Autowired
@@ -91,12 +94,11 @@ public class MessageController {
                 .findByUsername(recipient_name)
                 .orElseThrow(() -> new UsernameNotFoundException("User is not found"));
 
-        var tmpUsersList = List.of(curUser, recipient);
         List<Message> messages = messageRepo
-                .findMessagesBySenderIsInAndRecipientIsInOrderByTimeAsc(tmpUsersList, tmpUsersList);
+                .findByRecipientAndSenderIdFromTo(curUser.getId(), recipient.getId(), 0, PAGE_SIZE);
 
         result.setViewName("dialog");
-        map.put("messages", messages);
+        map.put("messages", messages.stream().map(MessageResponse::new).collect(Collectors.toList()));
         map.put("username", curUser.getUsername());
         map.put("recipient_name", recipient_name);
         result.addAllObjects(map);
@@ -126,6 +128,7 @@ public class MessageController {
         return ResponseEntity.ok(new MessageResponse(message));
     }
 
+
     @DeleteMapping("/dialog")
     ResponseEntity<Object> deleteMessage(
             @RequestBody(required = false) MessageRequest messageRequest,
@@ -145,5 +148,22 @@ public class MessageController {
         messageRepo.delete(message);
         messageRepo.flush();
         return ResponseEntity.ok("Deleted message");
+    }
+
+
+    @PostMapping("/dialog/loadMessages")
+    ResponseEntity<Object> loadMessages(
+            @RequestBody(required = false) MessageRequest messageRequest,
+            @AuthenticationPrincipal User curUser) throws UsernameNotFoundException {
+
+        User recipient = userRepo
+                .findByUsername(messageRequest.getRecipientName())
+                .orElseThrow(() -> new UsernameNotFoundException("User is not found"));
+
+        List<Message> messages = messageRepo
+                .findByRecipientAndSenderIdFromTo(curUser.getId(), recipient.getId(), messageRequest.getRowNumber(), PAGE_SIZE);
+
+        return ResponseEntity.ok(messages.stream().map(MessageResponse::new).collect(Collectors.toList()));
+
     }
 }

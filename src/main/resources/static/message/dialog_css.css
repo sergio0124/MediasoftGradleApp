@@ -52,7 +52,7 @@ body {
     overflow: scroll;
     horiz-align: center;
     border: 2px solid black;
-    display: inline-block;
+    display: block;
 }
 
 #table_messages tr:hover {

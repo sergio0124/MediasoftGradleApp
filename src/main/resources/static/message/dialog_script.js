@@ -171,8 +171,10 @@ function add_image_event_listeners(context_m, row) {
 
 function emoji_event_listener_function(event, myself) {
     event.preventDefault();
-    context_menu_emoji.style.left = table.offsetLeft + myself.offsetLeft + event.offsetX + "px";
-    context_menu_emoji.style.top = table.offsetTop + myself.offsetTop + event.offsetY + "px";
+    let normal_offset = 65;
+
+    context_menu_emoji.style.left = event.clientX + "px";
+    context_menu_emoji.style.top = event.clientY + "px";
     document.getElementById("context_menu_only_emoji")
         .classList.add("active");
 
@@ -195,8 +197,8 @@ function event_listener_function(event, myself) {
     }
 
     event.preventDefault();
-    context_menu.style.left = table.offsetLeft + myself.offsetLeft + event.offsetX + "px";
-    context_menu.style.top = table.offsetTop + myself.offsetTop + event.offsetY + "px";
+    context_menu.style.left = event.clientX + "px";
+    context_menu.style.top = event.clientY + "px";
     document.getElementById("context_menu")
         .classList.add("active");
 
