@@ -17,7 +17,9 @@ public class User implements UserDetails {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String username;
+
     private String password;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
