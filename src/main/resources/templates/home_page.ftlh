@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Main page</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 
 <body>
@@ -24,6 +25,6 @@
 
 </body>
 
-<script type="text/javascript" src="javascript/home_script.js"></script>
+<script type="text/javascript" src="home_script.js"></script>
 
 </html>

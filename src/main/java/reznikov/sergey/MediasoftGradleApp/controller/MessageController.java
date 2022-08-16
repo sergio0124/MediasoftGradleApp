@@ -3,6 +3,7 @@ package reznikov.sergey.MediasoftGradleApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
@@ -59,7 +60,8 @@ public class MessageController {
 
 
     @PostMapping("/dialog")
-    ResponseEntity<Object> getDialogMessages(
+    @SendTo("/broadcast/m")
+    ResponseEntity<Object> createMessage(
             @RequestBody(required = false) MessageRequest messageRequest,
             @AuthenticationPrincipal User curUser
     ) throws UsernameNotFoundException {
