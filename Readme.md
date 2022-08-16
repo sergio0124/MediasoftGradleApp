@@ -27,4 +27,4 @@
                                  
 ## Планирую деплоить на heroku ##
 ## Если что-то поломается на хероку или возникнут другие проблемы (возникнут), я записал видос работы на локалхосте ##
-[a link](https://drive.google.com/file/d/1TWBWjqZxiWiMekLb8p3es5jv-zxTU1PQ/view?usp=sharing)
+[Ссылка на видео](https://drive.google.com/file/d/1TWBWjqZxiWiMekLb8p3es5jv-zxTU1PQ/view?usp=sharing)
