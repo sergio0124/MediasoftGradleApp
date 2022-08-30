@@ -3,17 +3,12 @@ package reznikov.sergey.MediasoftGradleApp.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Set;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "message")
 public class Message {
 
-    @org.springframework.data.annotation.Id
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -21,10 +16,7 @@ public class Message {
 
     private Timestamp time = Timestamp.from(Instant.now());
 
-    @CollectionTable(name = "message_emoji",
-            joinColumns = @JoinColumn(name = "message_id"))
     @Enumerated(EnumType.STRING)
-
     private Emoji emoji = null;
 
     @ManyToOne

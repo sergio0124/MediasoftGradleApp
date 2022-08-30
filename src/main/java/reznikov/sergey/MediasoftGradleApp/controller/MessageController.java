@@ -28,10 +28,14 @@ import java.util.stream.Collectors;
 public class MessageController {
     private final static int PAGE_SIZE = 10;
 
-    @Autowired
     MessageRepo messageRepo;
-    @Autowired
     UserRepo userRepo;
+
+    public MessageController(@Autowired MessageRepo messageRepo,
+                             @Autowired UserRepo userRepo) {
+        this.messageRepo = messageRepo;
+        this.userRepo = userRepo;
+    }
 
     @PostMapping("/dialog/emoji")
     ResponseEntity<Object> addEmoji(

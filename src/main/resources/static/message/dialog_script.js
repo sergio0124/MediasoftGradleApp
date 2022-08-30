@@ -171,7 +171,6 @@ function add_image_event_listeners(context_m, row) {
 
 function emoji_event_listener_function(event, myself) {
     event.preventDefault();
-    let normal_offset = 65;
 
     context_menu_emoji.style.left = event.clientX + "px";
     context_menu_emoji.style.top = event.clientY + "px";

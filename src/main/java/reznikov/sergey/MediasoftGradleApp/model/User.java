@@ -1,6 +1,5 @@
 package reznikov.sergey.MediasoftGradleApp.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,7 +13,6 @@ import java.util.Set;
 public class User implements UserDetails {
 
     @Id
-    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

@@ -12,7 +12,7 @@
 </#if>
 
 </div>
-<form action="/registration" method="post">
+<form action="users/registration" method="post">
     <div><label> User Name : <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
     <div><input type="submit" value="sign In"/></div>
