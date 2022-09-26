@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MediasoftGradleAppApplicationTests {
 
 	@Test
-	void userToStringTest() throws IOException {
+	void userToStringTest(){
 
 		User user = new User("username", "password");
 		String toStringResult = "User{id=null, username='username', password='password', roles=null, sentMessages=null, receivedMessages=null}";
